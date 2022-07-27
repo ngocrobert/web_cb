@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS - Loop</title>
+    <style type="text/css">
+        body {
+            display: flex;
+            font-weight: bold;
+            box-sizing: border-box;
+            /* justify-content: center; */
+            align-items: center;
+            flex-direction: column;
+        }
+        .input {
+            margin-bottom: 30px;
+           
+        }
+
+        #input_btn {
+            margin: 0 100px;
+        }
+
+        .ket_qua{
+           
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <form action="">
+        <div class="input">
+            Nhap so
+            <input type="number" id="input_so">
+            <br>
+        </div>
+        <button type="button" id="input_btn" onclick="in_ra()">Kiem tra</button>
+
+    </form>
+
+    <div class="ket_qua">
+        <div id="res_1"></div>
+        <div id="res_2"></div>
+        <div id="res_3"></div>
+        <div id="res_4"></div>
+    </div>
+
+    <script type="text/javascript">
+        var dem_so_lan_nhap = 0;
+
+        //nhan phim enter
+        document.getElementById("input_so").addEventListener("keypress", function(event){
+            if (event.key == "Enter") {
+                event.preventDefault();
+                document.getElementById("input_btn").click();
+            }
+            console.log("Enter")
+        })
+
+        //ktra so nhap vao
+        function in_ra(){
+            let number = parseFloat(document.getElementById("input_so").value);
+            dem_so_lan_nhap++; 
+
+            ktra1(number);
+            ktra2(number);
+            in_day_so(number);
+
+            document.getElementById("res_4").innerHTML = `Ban da nhap ${dem_so_lan_nhap} lan`;
+            document.getElementById("input_so").value = "";
+        }
+        //chan le thap phan
+        function ktra1(number){
+            let res1 = document.getElementById("res_1");
+            if(number % 2 == 0) {
+                res1.innerHTML = `So ${number} la so chan`;
+            }
+            else if (number % 2 == 1) {
+                res1.innerHTML = `So ${number} la so le `;
+            }
+            else {
+                res1.innerHTML = `So ${number} la so thap phan`;
+            }
+        }
+
+        function ktra2(number){
+            let res2 = document.getElementById("res_2");
+            let isPrime = true;
+            for (let i =2; i<=Math.sqrt(number); i++) {
+                if(number%i==0)
+                    isPrime = false;
+            }
+
+            if(!isPrime || number<=1)
+                res2.innerHTML = `So ${number} khong la so nguyen to`;
+            else 
+                res2.innerHTML = `So ${number} la so nguyen to`;
+        }
+
+        function in_day_so(number){ 
+            let res3  = document.getElementById("res_3");
+            res3.innerHTML = "";
+            if (number>0) {
+                for(let i=1; i<= number; i++) {
+                    res3.innerHTML += `${i} `;
+                }
+            }
+            else if (number<=0) {
+                for(let i=number; i<= 1; i++) {
+                    res3.innerHTML += `${i} `;
+                }
+            }
+            else {
+                res3.innerHTML = "Trong...";
+            }
+        }
+
+    </script>
+</body>
+</html>
